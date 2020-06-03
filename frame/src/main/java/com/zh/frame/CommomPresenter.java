@@ -1,26 +1,45 @@
 package com.zh.frame;
 
-public class CommomPresenter implements ICommonPreseneter {
-    private ICommonView view;
-    private ICommonModel model;
+import java.lang.ref.SoftReference;
+
+public class CommomPresenter<V extends ICommonView,M extends ICommonModel> implements ICommonPreseneter {
+    private SoftReference<V> mView;
+    private SoftReference<M> mMdel;
 
     public CommomPresenter(ICommonView view, ICommonModel model) {
-        this.view = view;
-        this.model = model;
+        mView = (SoftReference<V>) new SoftReference<>(view);
+        mMdel = (SoftReference<M>) new SoftReference<>(model);
     }
 
     @Override
     public void getData(int whichApi, Object... pPs) {
-        model.getData(this, whichApi, pPs);
+        if(mMdel!=null && mMdel.get() !=null){
+            mMdel.get().getData(this, whichApi, pPs);
+        }
     }
 
     @Override
-    public void onSuccess(int whichApi, int loadType, Object... pD) {
-        view.onSuccess(whichApi, loadType, pD);
+    public void onSuccess(int whichApi, Object... pD) {
+        if (mView!=null && mView.get()!=null){
+            mView.get().onSuccess(whichApi, pD);
+        }
     }
 
     @Override
     public void onFailed(int whichApi, Throwable pThrowable) {
-        view.onFailed(whichApi, pThrowable);
+        if (mView!=null&& mView.get()!=null){
+            mView.get().onFailed(whichApi, pThrowable);
+        }
+    }
+
+    public void clear(){
+        if (mView!=null){
+            mView.clear();
+            mView = null;
+        }
+        if (mMdel != null) {
+            mMdel.clear();
+            mMdel = null;
+        }
     }
 }

@@ -8,7 +8,7 @@ public interface ICommonView<D> {
     * @param loadType 类型的回调（正常加载，刷新，加载更多）
     * @param pD 一般是实体类的回调，但为了框架的灵活性，确保其他一些数据的偶发性回调，故未将长度写死
     * */
-    void onSuccess(int whichApi,int loadType,D... pD);
+    void onSuccess(int whichApi,D... pD);
 
     /*
     *
