@@ -240,4 +240,9 @@
     <declare-styleable name="LoginView">
         <attr format="boolean" name="isMoreType"/>
     </declare-styleable>
+    <declare-styleable name="BottomTabView">
+        <attr name="tabNum" format="integer" />
+        <attr name="selectedColor" format="color" />
+        <attr name="unSelectedColor" format="color" />
+    </declare-styleable>
 </resources>

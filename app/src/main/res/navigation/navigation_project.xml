@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_home"
+    app:startDestination="@id/homeFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.zh.project_mvp.view.fragment.HomeFragment"
+        android:label="HomeFragment">
+      <!--  <action
+            android:id="@+id/toAdvert"
+            app:destination="@id/advertFragment" />-->
+    </fragment>
+    <!--<fragment
+        android:id="@+id/advertFragment"
+        android:name="com.teach.kotlinlearn.ui.fragment.AdvertFragment"
+        android:label="AdvertFragment">
+        <action
+            android:id="@+id/backToHome"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseDetailFragment"
+        android:name="com.teach.kotlinlearn.ui.fragment.CourseDetailFragment"
+        android:label="CourseDetailFragment">
+        <action
+            android:id="@+id/backToHome"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoPlayerFragmentFragment"
+        android:name="com.teach.kotlinlearn.ui.fragment.VideoPlayerFragment"
+        android:label="VideoPlayerFragmentFragment" />
+    <fragment
+        android:id="@+id/groupDetailFragment"
+        android:name="com.teach.kotlinlearn.ui.fragment.GroupDetailFragment"
+        android:label="GroupDetailFragment"/>-->
+</navigation>

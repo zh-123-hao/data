@@ -1,13 +1,36 @@
 package com.zh.project_mvp.view;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import androidx.navigation.Navigation;
+
 import com.zh.project_mvp.R;
-public class HomeActivity extends AppCompatActivity {
+import com.zh.project_mvp.base.BaseMvpActivity;
+import com.zh.project_mvp.model.CommomModel;
+
+public class HomeActivity extends BaseMvpActivity<CommomModel> {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    public void setUpData() {
+
+    }
+
+    @Override
+    public void setUpView() {
+        Navigation.findNavController(this,R.id.project_fragment_control);
+    }
+
+    @Override
+    public CommomModel setModel() {
+        return new CommomModel();
+    }
+
+    @Override
+    public int getLayoutID() {
+        return R.layout.activity_home;
+    }
+
+    @Override
+    public void netSuccess(int whichApi, Object[] pD) {
+
     }
 }

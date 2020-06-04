@@ -119,7 +119,7 @@ public class SplashActivity extends BaseSplashActivity{
             mSubscribe.dispose();
         }
 
-        startActivity(new Intent(this,mSelectedInfo != null && !TextUtils.isEmpty(mSelectedInfo.getSpecialty_id()) ? mApplication.isLogin() ? HomeActivity.class : SubjectActivity.class  : LoginActivity.class ));
+        startActivity(new Intent(this,mSelectedInfo != null && !TextUtils.isEmpty(mSelectedInfo.getSpecialty_id()) ? mApplication.isLogin() ? HomeActivity.class :LoginActivity.class : SubjectActivity.class));
         finish();
     }
 

@@ -1,5 +1,6 @@
 package com.zh.project_mvp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,7 +48,8 @@ public class SubjectActivity extends BaseMvpActivity<LauchModel> {
     public void setUpView() {
         title_content = findViewById(R.id.title_content);
         recyclerView = findViewById(R.id.recyclerView);
-
+        more_content = findViewById(R.id.more_content);
+        more_content.setText("完成");
         title_content.setText(getString(R.string.select_subject));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new SubjectAdapter(mListData, this);
@@ -57,6 +59,7 @@ public class SubjectActivity extends BaseMvpActivity<LauchModel> {
         back_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(SubjectActivity.this, HomeActivity.class));
                 finish();
             }
         });

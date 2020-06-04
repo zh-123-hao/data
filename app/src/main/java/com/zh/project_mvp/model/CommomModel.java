@@ -13,8 +13,6 @@ public class CommomModel implements ICommonModel {
     NetManger netManger = NetManger.getInstance();
     @Override
     public void getData(final ICommonPreseneter preseneter, final int whichApi, Object[] params) {
-
-
         switch (whichApi){
             case ApiConfig.TEST_GET :
                 final int loaType = (int) params[0];
@@ -23,8 +21,5 @@ public class CommomModel implements ICommonModel {
                 netManger.netWork(netManger.getService().getData(param, pageId), preseneter, whichApi, loaType);
             break;
         }
-
-
-
     }
 }
