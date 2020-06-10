@@ -8,7 +8,7 @@ import com.zh.frame.R;
  * Created by Administrator on 2016/8/2.
  */
 public class Constants {
-
+    public static final int LIMIT_NUM = 10;
     public static String RSA_PUBLIC;
 
     static {

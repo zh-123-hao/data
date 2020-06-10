@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/mainPageFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="com.zh.project_mvp.fragment.MainPageFragment"
+        android:label="MainPageFragment">
+    </fragment>
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="com.zh.project_mvp.fragment.CourseFragment"
+        android:label="CourseFragment"/>
+    <fragment
+        android:id="@+id/vipFragment"
+        android:name="com.zh.project_mvp.fragment.VipkFragment"
+        android:label="VIPFragment"/>
+    <fragment
+        android:id="@+id/dataFragment"
+        android:name="com.zh.project_mvp.fragment.DataFragment"
+        android:label="DataFragment"/>
+    <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.zh.project_mvp.fragment.MineFragment"
+        android:label="MineFragment"/>
+
+</navigation>

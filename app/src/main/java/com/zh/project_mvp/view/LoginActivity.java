@@ -1,8 +1,8 @@
 package com.zh.project_mvp.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
+import android.text.TextUtils;
 import android.view.View;
 
 import com.zh.data.BaseInfo;
@@ -14,21 +14,19 @@ import com.zh.project_mvp.R;
 import com.zh.project_mvp.base.BaseMvpActivity;
 import com.zh.project_mvp.model.AccountModel;
 import com.zh.utils.utils.newAdd.SharedPrefrenceUtils;
-
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+
+import static com.zh.project_mvp.JumpConstant.*;
 
 public class LoginActivity extends BaseMvpActivity<AccountModel> implements LoginView.LoginViewCallBack {
     @BindView(R.id.login_view)
     LoginView mLoginView;
     private String phone;
     private Disposable mSubscribe;
+    private String mFromType;
+
     @Override
     public void setUpData() {
 
@@ -36,6 +34,7 @@ public class LoginActivity extends BaseMvpActivity<AccountModel> implements Logi
 
     @Override
     public void setUpView() {
+        mFromType = getIntent().getStringExtra(JUMP_KEY);
         mLoginView.setLoginViewCallBack(this);
     }
 
@@ -76,6 +75,9 @@ public class LoginActivity extends BaseMvpActivity<AccountModel> implements Logi
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.close_login:
+                if (!TextUtils.isEmpty(mFromType) && (mFromType.equals(SUB_TO_LOGIN) || mFromType.equals(SPLASH_TO_LOGIN))){
+                    startActivity(new Intent(this,HomeActivity.class));
+                }
                 finish();
                 break;
             case R.id.register_press:
@@ -89,8 +91,10 @@ public class LoginActivity extends BaseMvpActivity<AccountModel> implements Logi
         }
     }
     private void jump() {
-        startActivity(new Intent(this,HomeActivity.class));
-        this.finish();
+        if (mFromType.equals(SPLASH_TO_LOGIN) ||  mFromType.equals(SUB_TO_LOGIN)){
+            startActivity(new Intent(this,HomeActivity.class));
+        }
+        finish();
     }
     private long time = 60l;
     private void goTime() {

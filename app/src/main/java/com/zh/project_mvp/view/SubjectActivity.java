@@ -23,46 +23,66 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.zh.project_mvp.JumpConstant.JUMP_KEY;
+import static com.zh.project_mvp.JumpConstant.SPLASH_TO_SUB;
+import static com.zh.project_mvp.JumpConstant.SUB_TO_LOGIN;
 
 public class SubjectActivity extends BaseMvpActivity<LauchModel> {
 
+    @BindView(R.id.back_image)
+    ImageView back_image;
+    @BindView(R.id.title_content)
+    TextView title_content;
+    @BindView(R.id.right_image)
+    ImageView right_image;
+    @BindView(R.id.more_content)
+    TextView more_content;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
     private List<SpecialtyChooseEntity> mListData = new ArrayList<>();
-
-    private TextView title_content;
-    private RecyclerView recyclerView;
     private SubjectAdapter adapter;
-    private ImageView back_image;
-    private ImageView right_image;
-    private TextView more_content;
+    private String mFrom;
 
     @Override
     public void setUpData() {
-        if (SharedPrefrenceUtils.getSerializableList(this, ConstantKey.SUBJECT_LIST) != null) {
-            mListData.addAll(SharedPrefrenceUtils.<SpecialtyChooseEntity>getSerializableList(this, ConstantKey.SUBJECT_LIST));
+        List<SpecialtyChooseEntity> info = SharedPrefrenceUtils.getSerializableList(this, ConstantKey.SUBJECT_LIST);
+        if (info != null) {
+            mListData.addAll(info);
             adapter.notifyDataSetChanged();
-        } else
+        } else {
             presenter.getData(ApiConfig.SUBJECT);
+        }
     }
 
     @Override
     public void setUpView() {
-        title_content = findViewById(R.id.title_content);
-        recyclerView = findViewById(R.id.recyclerView);
-        more_content = findViewById(R.id.more_content);
+        mFrom = getIntent().getStringExtra(JUMP_KEY);
         more_content.setText("完成");
         title_content.setText(getString(R.string.select_subject));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new SubjectAdapter(mListData, this);
         recyclerView.setAdapter(adapter);
         back_image = findViewById(R.id.back_image);
-
-        back_image.setOnClickListener(new View.OnClickListener() {
+        more_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SubjectActivity.this, HomeActivity.class));
+                if (mApplication.getSelectedInfo() == null) {
+                    showToast("请选择专业");
+                    return;
+                }
+                if (mFrom.equals(SPLASH_TO_SUB)) {
+                    if (mApplication.isLogin()) {
+                        startActivity(new Intent(SubjectActivity.this, HomeActivity.class));
+                    } else {
+                        startActivity(new Intent(SubjectActivity.this, LoginActivity.class).putExtra(JUMP_KEY, SUB_TO_LOGIN));
+                    }
+                }
                 finish();
             }
         });
+
     }
 
     @Override
@@ -87,4 +107,21 @@ public class SubjectActivity extends BaseMvpActivity<LauchModel> {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPrefrenceUtils.putObject(this, ConstantKey.SUBJECT_SELECT, mApplication.getSelectedInfo());
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.back_image)
+    public void onImagebackClicked() {
+        finish();
+    }
 }

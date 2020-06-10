@@ -64,7 +64,7 @@ public class NetManger {
                 .subscribe(new BaseObserver() {
                     @Override
                     public void onSuccess(Object value) {
-                        pPresenter.onSuccess(whichApi, value);
+                        pPresenter.onSuccess(whichApi, value, o != null && o.length == 1 ? o[0] : o);
                     }
 
                     @Override

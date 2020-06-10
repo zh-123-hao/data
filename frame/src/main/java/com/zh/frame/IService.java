@@ -1,6 +1,10 @@
 package com.zh.frame;
 
+import com.google.gson.JsonObject;
 import com.zh.data.BaseInfo;
+import com.zh.data.CourseListInfo;
+import com.zh.data.DataGroupListEntity;
+import com.zh.data.IndexCommondEntity;
 import com.zh.data.LoginInfo;
 import com.zh.data.MainAdEntity;
 import com.zh.data.PersonHeader;
@@ -15,6 +19,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 public interface IService {
 
@@ -37,4 +42,26 @@ public interface IService {
     @POST("getUserHeaderForMobile")
     @FormUrlEncoded
     Observable<BaseInfo<PersonHeader>> getHeaderInfo(@FieldMap Map<String,Object> params);
+
+
+    @GET("openapi/lesson/getLessonListForApi?")
+    Observable<BaseInfo<CourseListInfo>> getCourseChildData( @QueryMap Map<String,Object> params);
+
+    @GET("lesson/getIndexCommend")
+    Observable<BaseInfo<List<IndexCommondEntity>>> getCommonList(@QueryMap Map<String,Object> params);
+
+    @GET("lesson/getCarouselphoto")
+    Observable<JsonObject> getBannerLive(@QueryMap Map<String,Object> params);
+
+    @GET("group/getGroupList")
+    Observable<BaseInfo<List<DataGroupListEntity>>> getGroupList(@QueryMap Map<String,Object> params);
+
+    @POST("removeGroup")
+    @FormUrlEncoded
+    Observable<BaseInfo> removeFocus(@FieldMap Map<String,Object> params);
+
+    @POST("joingroup")
+    @FormUrlEncoded
+    Observable<BaseInfo> focus(@FieldMap Map<String,Object> params);
+
 }
