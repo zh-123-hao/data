@@ -79,10 +79,11 @@ public class CourseChildFragment extends BaseMvpFragment<CourseModel> implements
                 BaseInfo<CourseListInfo>info = (BaseInfo<CourseListInfo>) pD[0];
                 if (info.isSuccess()){
                     List<SearchItemEntity> lists = info.result.lists;
-                    if (page == 1){
+                    int load = (int) pD[1];
+                    if (load == LoadTypeConfig.REFRESH){
                         refreshLayout.finishRefresh();
                         mList.clear();
-                    }else{
+                    }else if (load == LoadTypeConfig.MORE){
                         refreshLayout.finishLoadMore();
                     }
                     mList.addAll(lists);

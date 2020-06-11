@@ -7,6 +7,7 @@
     tools:context=".view.LoginActivity">
 
 
+
     <ImageView
         android:id="@+id/close_login"
         android:layout_width="@dimen/dp_46"
@@ -21,9 +22,7 @@
         android:id="@+id/logo_image"
         android:layout_width="@dimen/dp_50"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:src="@mipmap/ic_logo_shadow"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/close_login" />

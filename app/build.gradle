@@ -3,6 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "com.zh.project_mvp"
         minSdkVersion 22
@@ -40,4 +44,5 @@ dependencies {
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha08'
     implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha08'
     implementation "com.flyco.tablayout:FlycoTabLayout_Lib:2.0.8@aar"
+    implementation project(path: ':basepopo')
 }

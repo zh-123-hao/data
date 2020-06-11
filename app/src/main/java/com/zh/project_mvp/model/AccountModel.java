@@ -7,6 +7,7 @@ import com.zh.frame.FrameApplication;
 import com.zh.frame.ICommonModel;
 import com.zh.frame.ICommonPreseneter;
 import com.zh.frame.NetManger;
+import com.zh.frame.secret.RsaUtil;
 import com.zh.frame.utils.ParamHashMap;
 import com.zh.project_mvp.R;
 import com.zh.project_mvp.base.Application1907;
@@ -26,6 +27,25 @@ public class AccountModel implements ICommonModel {
             case ApiConfig.GET_HEADER_INFO :
                 String uid = FrameApplication.getFrameApplication().getLoginInfo().getUid();
                 netManger.netWork(netManger.getService(context.getString(R.string.passport_api)).getHeaderInfo(new ParamHashMap().add("zuid",uid).add("uid",uid)),preseneter,whichApi);
+                break;
+            case ApiConfig.REGISTER_PHONE :
+                ParamHashMap add = new ParamHashMap().add("mobile", params[0]).add("code", params[1]);
+                netManger.netWork(netManger.getService(context.getString(R.string.passport_api)).checkVerifyCode(add), preseneter, whichApi);
+                break;
+            case  ApiConfig.CHECK_PHONE_IS_USED :
+                netManger.netWork(netManger.getService(context.getString(R.string.passport_api)).checkPhoneIsUsed(params[0]), preseneter, whichApi);
+                break;
+            case ApiConfig.SEND_REGISTER_VERIFY :
+                netManger.netWork(netManger.getService(context.getString(R.string.passport_api)).sendRegisterVerify(params[0]), preseneter, whichApi);
+                break;
+            case ApiConfig.NET_CHECK_USERNAME :
+                netManger.netWork(netManger.getService(context.getString(R.string.passport)).checkName(params[0]), preseneter, whichApi);
+                break;
+            case ApiConfig.COMPLETE_REGISTER_WITH_SUBJECT :
+                ParamHashMap param = new ParamHashMap().add("username", params[0]).add("password", RsaUtil.encryptByPublic((String) params[1]))
+                        .add("tel", params[2]).add("specialty_id", FrameApplication.getFrameApplication().getSelectedInfo().getSpecialty_id())
+                        .add("province_id", 0).add("city_id", 0).add("sex", 0).add("from_reg_name", 0).add("from_reg", 0);
+                netManger.netWork(netManger.getService(context.getString(R.string.passport_api)).registerCompleteWithSubject(param), preseneter, whichApi);
                 break;
         }
     }

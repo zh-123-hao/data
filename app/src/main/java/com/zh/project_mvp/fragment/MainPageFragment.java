@@ -75,10 +75,11 @@ public class MainPageFragment extends BaseMvpFragment<MainPageModel> implements 
         switch (whichApi){
             case ApiConfig.MAIN_PAGE_LIST :
                 BaseInfo<List<IndexCommondEntity>> info = (BaseInfo<List<IndexCommondEntity>>) pD[0];
+                int load = (int) pD[1];
                 if (info.isSuccess()){
-                    if (page == 1){
+                    if (load == LoadTypeConfig.MORE){
                         refreshLayout.finishLoadMore();
-                    }else {
+                    }else if (load == LoadTypeConfig.REFRESH){
                         bottomList.clear();
                         refreshLayout.finishRefresh();
                     }
