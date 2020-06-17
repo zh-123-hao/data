@@ -32,7 +32,7 @@ public class BaseActivity extends AppCompatActivity {
                 @Override
                 public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                     if (pDataListenter!=null){
-                        pDataListenter.dataTyoe(LoadTypeConfig.REFRESH);
+                        pDataListenter.dataTye(LoadTypeConfig.REFRESH);
                     }
                 }
             });
@@ -40,7 +40,7 @@ public class BaseActivity extends AppCompatActivity {
                 @Override
                 public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                     if (pDataListenter!=null){
-                        pDataListenter.dataTyoe(LoadTypeConfig.MORE);
+                        pDataListenter.dataTye(LoadTypeConfig.MORE);
                     }
                 }
             });

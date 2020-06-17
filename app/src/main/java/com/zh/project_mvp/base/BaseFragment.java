@@ -2,9 +2,11 @@ package com.zh.project_mvp.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,7 +31,7 @@ public class BaseFragment extends Fragment {
                 @Override
                 public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                     if (pDataListenter!=null){
-                        pDataListenter.dataTyoe(LoadTypeConfig.REFRESH);
+                        pDataListenter.dataTye(LoadTypeConfig.REFRESH);
                     }
                 }
             });
@@ -37,7 +39,7 @@ public class BaseFragment extends Fragment {
                 @Override
                 public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                     if (pDataListenter!=null){
-                        pDataListenter.dataTyoe(LoadTypeConfig.MORE);
+                        pDataListenter.dataTye(LoadTypeConfig.MORE);
                     }
                 }
             });
@@ -50,5 +52,8 @@ public class BaseFragment extends Fragment {
 
     public void showToast(Object content) {
         Toast.makeText(getContext(), content.toString(), Toast.LENGTH_SHORT).show();
+    }
+    public int setColor(@ColorRes int pColor){
+        return ContextCompat.getColor(getContext(),pColor);
     }
 }

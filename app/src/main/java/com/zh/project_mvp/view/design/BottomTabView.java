@@ -60,7 +60,10 @@ public class BottomTabView extends RelativeLayout {
         }
         ta.recycle();
     }
-
+    public void changeSelected(int pos){
+        defaultTab = pos;
+        setStyle();
+    }
     public void setResource(List<Integer> normalIcon,List<Integer> selectedIcon,List<String> tabContent){
         if (defaultTab<=0){
             Log.e(this.getClass().getSimpleName(), "setResource: "+"0个tab，你玩lz呢" );

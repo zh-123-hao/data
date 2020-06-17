@@ -3,6 +3,7 @@ package com.zh.project_mvp.base;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ public abstract class BaseMvpFragment<M extends ICommonModel> extends BaseFragme
     private M model;
     public CommomPresenter persenter;
     private Unbinder mBind;
+    private boolean isInit;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,10 +30,13 @@ public abstract class BaseMvpFragment<M extends ICommonModel> extends BaseFragme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        model = setModel();
-        persenter = new CommomPresenter(this, model);
         setUpView();
-        setUpData();
+        if (model == null)model = setModel();
+        if (persenter == null)persenter = new CommomPresenter(this, model);
+        if (!isInit){
+            setUpData();
+            isInit = true;
+        }
     }
 
     protected abstract int setLayoutId();
@@ -53,6 +58,7 @@ public abstract class BaseMvpFragment<M extends ICommonModel> extends BaseFragme
 
     @Override
     public void onFailed(int whichApi, Throwable pThrowable) {
+        showLog("net work error: " + whichApi + "error content" + pThrowable != null && !TextUtils.isEmpty(pThrowable.getMessage()) ? pThrowable.getMessage() : "不明错误类型");
         netFailed(whichApi, pThrowable);
     }
 

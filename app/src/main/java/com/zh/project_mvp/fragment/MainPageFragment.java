@@ -128,7 +128,7 @@ public class MainPageFragment extends BaseMvpFragment<MainPageModel> implements 
     }
 
     @Override
-    public void dataTyoe(int mode) {
+    public void dataTye(int mode) {
         if (mode == LoadTypeConfig.REFRESH) {
             mainList = false;
             banLive = false;

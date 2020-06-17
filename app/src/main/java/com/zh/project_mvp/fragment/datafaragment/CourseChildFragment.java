@@ -93,7 +93,7 @@ public class CourseChildFragment extends BaseMvpFragment<CourseModel> implements
 
 
     @Override
-    public void dataTyoe(int mode) {
+    public void dataTye(int mode) {
         if (mode == LoadTypeConfig.REFRESH)
             persenter.getData(ApiConfig.COURSE_CHILD, LoadTypeConfig.REFRESH, mIndex, 1);
         else {

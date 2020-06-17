@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.zh.data.BaseInfo;
 import com.zh.data.CourseListInfo;
 import com.zh.data.DataGroupListEntity;
+import com.zh.data.GroupDetailEntity;
 import com.zh.data.IndexCommondEntity;
 import com.zh.data.LoginInfo;
 import com.zh.data.MainAdEntity;
@@ -85,4 +86,24 @@ public interface IService {
     @FormUrlEncoded
     Observable<BaseInfo> registerCompleteWithSubject(@FieldMap Map<String,Object> params);
 
+    @POST("user/userLoginNewAuth")
+    @FormUrlEncoded
+    Observable<BaseInfo<LoginInfo>> loginByAccount(@FieldMap Map<String,Object> params);
+
+    @GET("access_token")
+    Observable<JsonObject> getWechatToken(@QueryMap Map<String,Object> parmas);
+
+    @POST("thirdlogin")
+    @FormUrlEncoded
+    Observable<BaseInfo<LoginInfo>> loginByWechat(@FieldMap Map<String,Object> params);
+
+    @POST
+    @FormUrlEncoded
+    Observable<BaseInfo> bindThirdAccount(@Url String url, @FieldMap Map<String,Object> params);
+
+    @GET("group/getGroupThreadList")
+    Observable<BaseInfo<GroupDetailEntity>> getGroupDetail(@Query("gid") Object object);
+
+    @GET("group/getGroupThreadList")
+    Observable<JsonObject> getGroupDetailFooterData(@QueryMap Map<String,Object> parmas);
 }

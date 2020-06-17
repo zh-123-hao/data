@@ -36,8 +36,9 @@ public class MainActivity extends BaseMvpActivity {
         mSmartRefreshLayout = findViewById(R.id.smartRefreshLayout);
         params = new ParamHashMap().add("c", "api").add("a", "getList");
         initRcyclerView(mRecyclerView, mSmartRefreshLayout, new DataListenter() {
+
             @Override
-            public void dataTyoe(int mode) {
+            public void dataTye(int mode) {
                 if (mode == LoadTypeConfig.REFRESH) {
                     page_id = 0;
                     presenter.getData(ApiConfig.TEST_GET, LoadTypeConfig.REFRESH, params, page_id);

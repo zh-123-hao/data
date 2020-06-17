@@ -1,6 +1,7 @@
 package com.zh.project_mvp.fragment.datafaragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -9,12 +10,14 @@ import com.zh.data.DataGroupListEntity;
 import com.zh.frame.ApiConfig;
 import com.zh.frame.FrameApplication;
 import com.zh.frame.LoadTypeConfig;
+import com.zh.frame.constants.ConstantKey;
 import com.zh.project_mvp.R;
 import com.zh.project_mvp.adapter.DataGroupAdapter;
 import com.zh.project_mvp.base.BaseMvpFragment;
 import com.zh.project_mvp.interfaces.DataListenter;
 import com.zh.project_mvp.interfaces.OnRecyclerItemClick;
 import com.zh.project_mvp.model.DataModel;
+import com.zh.project_mvp.view.HomeActivity;
 import com.zh.project_mvp.view.LoginActivity;
 
 import java.util.ArrayList;
@@ -104,22 +107,14 @@ public class DataGroupFragment extends BaseMvpFragment<DataModel> implements Dat
     }
 
     @Override
-    public void dataTyoe(int mode) {
-        if (mode == LoadTypeConfig.REFRESH) {
-            persenter.getData(ApiConfig.DATA_GROUP, LoadTypeConfig.REFRESH, 1);
-        } else {
-            page++;
-            persenter.getData(ApiConfig.DATA_GROUP, LoadTypeConfig.MORE, page);
-        }
-    }
-
-
-    @Override
     public void onItemClick(int pos, Object[] pObjects) {
         if (pObjects!=null&&pObjects.length!=0){
             switch ((int)pObjects[0]){
                 case ITEM_TYPE:
-
+                    HomeActivity activity = (HomeActivity) getActivity();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(ConstantKey.GROU_TO_DETAIL_GID,mList.get(pos).getGid());
+                    activity.mProjectController.navigate(R.id.dataGroupDetailFragment,bundle);
                 break;
                 case FOCUS_TYPE :
                     boolean login = FrameApplication.getFrameApplication().isLogin();
@@ -135,6 +130,16 @@ public class DataGroupFragment extends BaseMvpFragment<DataModel> implements Dat
                     }
                 break;
             }
+        }
+    }
+
+    @Override
+    public void dataTye(int mode) {
+        if (mode == LoadTypeConfig.REFRESH) {
+            persenter.getData(ApiConfig.DATA_GROUP, LoadTypeConfig.REFRESH, 1);
+        } else {
+            page++;
+            persenter.getData(ApiConfig.DATA_GROUP, LoadTypeConfig.MORE, page);
         }
     }
 }

@@ -40,5 +40,5 @@
     <string name="fx_openapi">https://fx.zhulong.com/openapi/</string>
     <string name="photo_url">https://photo.zhulong.com/</string>
     <string name="photo_openapi">https://photo.zhulong.com/openapi/</string>
-
+    <string name="wx_oauth">https://api.weixin.qq.com/sns/oauth2/</string>
 </resources>

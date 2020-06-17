@@ -45,4 +45,5 @@ public class ConstantKey {
     public static final int PLAY_TYPE_LESSON = 1;
     public static final int LOGIN_TO_BIND=20;
     public static final int BIND_BACK_LOGIN=21;
+    public static final String GROU_TO_DETAIL_GID = "grou_to_detail_gid";
 }

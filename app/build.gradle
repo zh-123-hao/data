@@ -1,5 +1,53 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.mob.sdk'
+
+MobSDK {
+    appKey "1870c0d6af8c6"
+    appSecret "07e1eb2892b079a0278e54eb94f0a39d"
+
+    ShareSDK {
+        devInfo {
+            version "3.6.8"
+
+            QZone {
+                id 3
+                sortId 3
+                appId "1105712307"
+                appKey "JrFqzftdwJeUq9fj"
+                shareByAppClient true
+                enable true
+            }
+
+            Wechat {
+                id 4
+                sortId 4
+                appId "wx4b6c402fee6860c8"
+                appKey "1278977f2848ee16708c656f66abf35a"
+                shareByAppClient true
+                enable true
+            }
+
+            WechatMoments {
+                id 5
+                sortId 5
+                appId "wx4b6c402fee6860c8"
+                appKey "1278977f2848ee16708c656f66abf35a"
+                shareByAppClient true
+                enable true
+            }
+
+            QQ {
+                id 6
+                sortId 6
+                appId "1105712307"
+                appKey "JrFqzftdwJeUq9fj"
+                shareByAppClient true
+                enable true
+            }
+        }
+    }
+}
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
@@ -8,23 +56,41 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        applicationId "com.zh.project_mvp"
+        //applicationId "com.zh.project_mvp"
+        applicationId "com.zhulong.eduvideo"
         minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    //    注意：一定要放到buildTypes的上边
+    signingConfigs {
+        release {
+            storeFile file(storeFileName)
+            storePassword storepwd
+            keyAlias alias
+            keyPassword keypwd
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            signingConfig signingConfigs.release
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-v4:28.0.0'
@@ -35,14 +101,14 @@ dependencies {
     implementation project(path: ':data')
     implementation project(path: ':utils')
     // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     //butterknife依赖
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
-
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha08'
     implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha08'
-    implementation "com.flyco.tablayout:FlycoTabLayout_Lib:2.0.8@aar"
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.8@aar'
+    //导航栏
+    implementation 'com.hjm:BottomTabBar:1.1.1'
     implementation project(path: ':basepopo')
+    implementation files('libs/libammsdk.jar')
 }

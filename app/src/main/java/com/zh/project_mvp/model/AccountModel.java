@@ -2,11 +2,13 @@ package com.zh.project_mvp.model;
 
 import android.content.Context;
 
+import com.zh.data.ThirdLoginData;
 import com.zh.frame.ApiConfig;
 import com.zh.frame.FrameApplication;
 import com.zh.frame.ICommonModel;
 import com.zh.frame.ICommonPreseneter;
 import com.zh.frame.NetManger;
+import com.zh.frame.constants.ConstantKey;
 import com.zh.frame.secret.RsaUtil;
 import com.zh.frame.utils.ParamHashMap;
 import com.zh.project_mvp.R;
@@ -46,6 +48,32 @@ public class AccountModel implements ICommonModel {
                         .add("tel", params[2]).add("specialty_id", FrameApplication.getFrameApplication().getSelectedInfo().getSpecialty_id())
                         .add("province_id", 0).add("city_id", 0).add("sex", 0).add("from_reg_name", 0).add("from_reg", 0);
                 netManger.netWork(netManger.getService(context.getString(R.string.passport_api)).registerCompleteWithSubject(param), preseneter, whichApi);
+                break;
+            case ApiConfig.ACCOUNT_LOGIN :
+                ParamHashMap login = new ParamHashMap();
+                login.add("ZLSessionID", "");
+                login.add("seccode", "");
+                login.add("loginName", params[0]);
+                login.add("passwd", RsaUtil.encryptByPublic((String) params[1]));
+                login.add("cookieday", "");
+                login.add("ignoreMobile", "");
+                netManger.netWork(netManger.getService(context.getString(R.string.passport_openapi)).loginByAccount(login), preseneter, whichApi);
+                break;
+            case ApiConfig.GET_WE_CHAT_TOKEN :
+                ParamHashMap wxLogin = new ParamHashMap();
+                wxLogin.add("appid", ConstantKey.WX_APP_ID);
+                wxLogin.add("secret",  ConstantKey.WX_APP_SECRET);
+                wxLogin.add("code",params[0]);
+                wxLogin.add("grant_type", "authorization_code");
+                netManger.netWork(netManger.getService(context.getString(R.string.wx_oauth)).getWechatToken(wxLogin), preseneter, ApiConfig.GET_WE_CHAT_TOKEN );
+                break;
+            case ApiConfig.POST_WE_CHAT_LOGIN_INFO:
+                ThirdLoginData  data = (ThirdLoginData) params[0];
+                ParamHashMap postLogin = new ParamHashMap();
+                postLogin.add("openid",  data.openid);
+                postLogin.add("type",  data.type);
+                postLogin.add("url", "android");
+                netManger.netWork(netManger.getService(context.getString(R.string.passport_api)).loginByWechat(postLogin), preseneter, ApiConfig.POST_WE_CHAT_LOGIN_INFO);
                 break;
         }
     }

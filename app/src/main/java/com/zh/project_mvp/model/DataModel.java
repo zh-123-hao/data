@@ -11,6 +11,8 @@ import com.zh.frame.utils.ParamHashMap;
 import com.zh.project_mvp.R;
 import com.zh.project_mvp.base.Application1907;
 
+import java.util.Map;
+
 public class DataModel implements ICommonModel {
 
     @Override
@@ -30,7 +32,12 @@ public class DataModel implements ICommonModel {
                 ParamHashMap add2 = new ParamHashMap().add("gid", params[0]).add("group_name", params[1]).add("screctKey", FrameApplication.getFrameApplicationContext().getString(R.string.secrectKey_posting));
                 manger.netWork(manger.getService(mContext.getString(R.string.bbs_api)).focus(add2), preseneter, whichApi, params[2]);
                 break;
-
+            case ApiConfig.GROUP_DETAIL :
+                manger.netWork(manger.getService(mContext.getString(R.string.bbs_openapi)).getGroupDetail(params[0]), preseneter, whichApi);
+                break;
+            case ApiConfig.GROUP_DETAIL_FOOTER_DATA :
+                manger.netWork(manger.getService(mContext.getString(R.string.bbs_openapi)).getGroupDetailFooterData((Map<String, Object>)params[1]), preseneter, whichApi, params[0]);
+                break;
         }
     }
 }

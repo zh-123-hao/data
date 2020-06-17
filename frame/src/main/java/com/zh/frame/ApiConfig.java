@@ -19,4 +19,10 @@ public class ApiConfig {
     public static final int SEND_REGISTER_VERIFY = 16;
     public static final int NET_CHECK_USERNAME = 17;
     public static final int COMPLETE_REGISTER_WITH_SUBJECT = 18;
+    public static final int ACCOUNT_LOGIN = 19;
+    public static final int GET_WE_CHAT_TOKEN = 20;
+    public static final int POST_WE_CHAT_LOGIN_INFO = 21;
+    public static final int BIND_ACCOUNT = 22;
+    public static final int GROUP_DETAIL = 23;
+    public static final int GROUP_DETAIL_FOOTER_DATA = 24;
 }

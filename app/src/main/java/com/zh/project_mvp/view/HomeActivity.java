@@ -11,7 +11,7 @@ import com.zh.project_mvp.base.BaseMvpActivity;
 import com.zh.project_mvp.model.CommomModel;
 
 public class HomeActivity extends BaseMvpActivity<CommomModel> implements NavController.OnDestinationChangedListener {
-
+    public NavController mProjectController;
 
     @Override
     public void setUpData() {
@@ -20,8 +20,8 @@ public class HomeActivity extends BaseMvpActivity<CommomModel> implements NavCon
 
     @Override
     public void setUpView() {
-        NavController navController = Navigation.findNavController(this, R.id.project_fragment_control);
-        navController.addOnDestinationChangedListener(this);
+        mProjectController = Navigation.findNavController(this, R.id.project_fragment_control);
+        mProjectController.addOnDestinationChangedListener(this);
     }
 
     @Override
