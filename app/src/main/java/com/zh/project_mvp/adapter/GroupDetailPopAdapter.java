@@ -22,10 +22,12 @@ import java.util.List;
 public class GroupDetailPopAdapter extends RecyclerView.Adapter<GroupDetailPopAdapter.ViewHolder> {
     private Context mContext;
     private List<GroupDetailEntity.Tag.SelectsBean> mPopData;
+    private List<String> mContains;
 
-    public GroupDetailPopAdapter(Context pContext, List<GroupDetailEntity.Tag.SelectsBean> pPopData) {
+    public GroupDetailPopAdapter(Context pContext, List<GroupDetailEntity.Tag.SelectsBean> pPopData,List<String> mContains) {
         mContext = pContext;
         mPopData = pPopData;
+        this.mContains = mContains;
     }
 
     @NonNull
@@ -38,8 +40,8 @@ public class GroupDetailPopAdapter extends RecyclerView.Adapter<GroupDetailPopAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GroupDetailEntity.Tag.SelectsBean bean = mPopData.get(position);
         holder.popTab.setText(bean.getName());
-        holder.popTab.setTextColor(ContextCompat.getColor(mContext, bean.getOn() == 1 ? R.color.white : R.color.black));
-        holder.popTab.setBackground(ContextCompat.getDrawable(mContext, bean.getOn() == 1 ? R.drawable.shape_group_pop_item_bg : R.drawable.shape_group_pop_item_bg_unselected));
+        holder.popTab.setTextColor(ContextCompat.getColor(mContext, mContains.contains(bean.getName()) ? R.color.white : R.color.black));
+        holder.popTab.setBackground(ContextCompat.getDrawable(mContext, mContains.contains(bean.getName()) ? R.drawable.shape_group_pop_item_bg : R.drawable.shape_group_pop_item_bg_unselected));
         holder.popTab.setOnClickListener(v -> {
             if (mOnRecyclerItemClick != null) mOnRecyclerItemClick.onItemClick(position);
         });

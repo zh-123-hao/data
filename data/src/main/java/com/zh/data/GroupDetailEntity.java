@@ -1,5 +1,8 @@
 package com.zh.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -556,7 +559,7 @@ public class GroupDetailEntity implements Serializable {
 
     }
 
-    public static class Thread {
+    public static class Thread implements Parcelable {
         /**
          * tid : 20094205
          * gid : 200101
@@ -582,6 +585,32 @@ public class GroupDetailEntity implements Serializable {
         private String uid;
         private String is_essence;
         private String user_img;
+
+        protected Thread(Parcel in) {
+            tid = in.readString();
+            gid = in.readString();
+            title = in.readString();
+            pic = in.readString();
+            create_time = in.readString();
+            view_num = in.readString();
+            reply_num = in.readString();
+            username = in.readString();
+            uid = in.readString();
+            is_essence = in.readString();
+            user_img = in.readString();
+        }
+
+        public static final Creator<Thread> CREATOR = new Creator<Thread>() {
+            @Override
+            public Thread createFromParcel(Parcel in) {
+                return new Thread(in);
+            }
+
+            @Override
+            public Thread[] newArray(int size) {
+                return new Thread[size];
+            }
+        };
 
         public String getTid() {
             return tid;
@@ -670,6 +699,26 @@ public class GroupDetailEntity implements Serializable {
         public void setUser_img(String user_img) {
             this.user_img = user_img;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(tid);
+            dest.writeString(gid);
+            dest.writeString(title);
+            dest.writeString(pic);
+            dest.writeString(create_time);
+            dest.writeString(view_num);
+            dest.writeString(reply_num);
+            dest.writeString(username);
+            dest.writeString(uid);
+            dest.writeString(is_essence);
+            dest.writeString(user_img);
+        }
     }
 
     public static class Tag{
@@ -691,7 +740,17 @@ public class GroupDetailEntity implements Serializable {
         private String gid;
         private String sort;
         private List<SelectsBean> selects;
-//        private List<String> comment;
+        private List<String> containsName;
+
+        public List<String> getContainsName() {
+            return containsName;
+        }
+
+        public void setContainsName(List<String> pContainsName) {
+            containsName = pContainsName;
+        }
+
+        //        private List<String> comment;
         private boolean selecting;
 
         public boolean isSelecting() {

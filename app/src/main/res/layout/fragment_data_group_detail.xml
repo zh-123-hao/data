@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -62,13 +63,36 @@
             android:layout_height="1dp"
             android:background="#e6e6e6" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/tabRecycle"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_10"
-            android:background="@color/white" />
-
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/tabRecycle"
+                android:layout_width="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginRight="@dimen/dp_10"/>
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/slide_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/tabRecycle"
+                app:layout_constraintBottom_toBottomOf="@+id/tabRecycle"
+                tl:tl_divider_padding="2dp"
+                tl:tl_indicator_color="@color/red2e"
+                tl:tl_indicator_corner_radius="@dimen/dp_2"
+                tl:tl_indicator_height="@dimen/dp_0"
+                tl:tl_indicator_width="@dimen/dp_18"
+                tl:tl_indicator_width_equal_title="true"
+                tl:tl_tab_padding="12dp"
+                tl:tl_tab_space_equal="true"
+                tl:tl_textBold="SELECT"
+                tl:tl_textSelectColor="@color/red2e"
+                tl:tl_textUnselectColor="@color/color_gray_text"
+                tl:tl_textsize="@dimen/sp_16" />
+        </android.support.constraint.ConstraintLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -81,4 +105,9 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" ></android.support.v4.view.ViewPager>
 </android.support.design.widget.CoordinatorLayout>

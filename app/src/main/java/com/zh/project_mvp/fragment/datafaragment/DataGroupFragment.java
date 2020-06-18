@@ -114,6 +114,7 @@ public class DataGroupFragment extends BaseMvpFragment<DataModel> implements Dat
                     HomeActivity activity = (HomeActivity) getActivity();
                     Bundle bundle = new Bundle();
                     bundle.putString(ConstantKey.GROU_TO_DETAIL_GID,mList.get(pos).getGid());
+                    bundle.putString(ConstantKey.GROU_TO_DETAIL_NAME,mList.get(pos).getGroup_name());
                     activity.mProjectController.navigate(R.id.dataGroupDetailFragment,bundle);
                 break;
                 case FOCUS_TYPE :
